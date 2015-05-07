@@ -1,0 +1,61 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#box {
+    background: #4e4e4e;
+    color: #EEE;
+    font-family: verdana;
+    font-size: 13px;
+    
+    width: 400px;
+    height: auto;
+    overflow: auto;
+    #place{
+        background: #2e2e2e;
+        padding: 5px;
+        text-align: right;
+        font-family: Futura;
+        font-size: 20px;
+    }
+    
+    #weatherdetails{        
+        #degrees{
+            background: #1e1e1e;
+            float: left;
+            width: 125px;
+            font-size: 24px;
+            
+            text-align: center;
+        }
+        
+        #moredetails{
+            width: 275px;
+            float: right;
+            
+            #wind{
+                padding: 5px 0px 5px 5px;
+            }
+            
+            #forecast{
+                padding: 5px 0px 5px 5px;
+                border-top-style: dotted;
+                border-bottom-style: dotted;
+                border-width: 1px;
+                border-color: #000;
+            }
+            
+            #times{
+                padding: 5px;
+                
+                #sunrise{
+                    float: left;
+                }
+                
+                #sunset{
+                    float: right;
+                }
+            }
+        }
+    }
+}
