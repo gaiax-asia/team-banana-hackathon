@@ -1,33 +1,31 @@
-
-
 <div align='center'>
-<div id="box">
-  <div id="place">
-    <%= "#{@name}, #{@country}" %>
-  </div>
-  
-  <div id="weatherdetails">
-    <div id="degrees">
-      <%=  "#{@temp}° C" %><br/>
-      <%= image_tag "http://openweathermap.org/img/w/#{@icon_url}.png" %>
+  <div id="box">
+    <div id="place">
+      <%= "#{@name}, #{@country}" %>
     </div>
-    <div id="moredetails">
-      <div id="wind">
-        <%= "#{@wind} m/s wind speed"%>
+    
+    <div id="weatherdetails">
+      <div id="degrees">
+        <%=  "#{@temp}° C" %><br/>
+        <%= image_tag "http://openweathermap.org/img/w/#{@icon_url}.png" %>
       </div>
-      <div id="forecast">
-        <%= "Forecast: #{@desc}" %> 
-        
-      </div>
-      <div id="times">
-        <div id="sunrise">
-          <%= "Sunrise: #{@sunrise} " %>
+      <div id="moredetails">
+        <div id="wind">
+          <%= "#{@wind} m/s wind speed"%>
         </div>
-        <div id="sunset">
-          <%= "Sunset: #{@sunset} " %>
+        <div id="forecast">
+          <%= "Forecast: #{@desc}" %> 
+          
+        </div>
+        <div id="times">
+          <div id="sunrise">
+            <%= "Sunrise: #{@sunrise} " %>
+          </div>
+          <div id="sunset">
+            <%= "Sunset: #{@sunset} " %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
