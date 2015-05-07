@@ -1,3 +1,5 @@
+
+
 <div align='center'>
   <div id="box">
     <div id="place">
@@ -29,3 +31,119 @@
     </div>
   </div>
 </div>
+
+
+<div>
+  <h3 class="title">7 Day Temperature Forecast</h3>
+  <div id='content'></div>
+</div>
+<script type="text/jsx">
+    
+  var Constants = {};
+    
+  Constants.DAYS = [
+  "Sunday", "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday"
+  ];
+    
+  Constants.TEMPERATURE_TYPES = {
+    KELVIN: -1,
+    CELSIUS: 0,
+    FAHRENHEIT: 1
+  }
+
+  var WeatherApplication = React.createClass({
+    render: function() {
+      return <h1>Weather Application</h1>;
+    }
+  });
+
+  var WeatherGet = React.createClass({
+    getInitialState: function() {
+      return {
+        list: [],
+        city: {}
+      };
+    },
+
+    componentDidMount: function() {
+      var self = this;
+      $.get(this.props.source, function(result) {
+        console.log(result)
+        var list = result.list;
+        var city = result.city;
+        if (this.isMounted()) {
+          this.setState({
+            list: list,
+            city: city
+          });
+        }
+      }.bind(this));
+    },
+
+    render: function() {
+      list = this.state.list || {};
+      console.log(list)
+      return (
+      <div>
+        {list.map(function(data){
+          return <div className="daily_status"><DailyWrapper dt={data.dt} temp={data.temp.day} /></div>;
+        })}
+      </div>
+      );
+    }
+  });
+    
+  var DailyWrapper = React.createClass({
+    getDefaultProps:function(){
+      return {
+        dt: 0,
+        temp: 0
+      }
+    },
+
+    propTypes: {
+      dt: React.PropTypes.number.isRequired,
+      temp: React.PropTypes.number
+    },
+
+    render: function(){
+      date = new Date(this.props.dt * 1000)
+      return (
+      <div>
+        <h4>{Constants.DAYS[date.getDay()]}</h4>
+        <TemperatureWrapper temperature={this.props.temp} />
+      </div>
+      );
+    }
+  });
+    
+  var TemperatureWrapper = React.createClass({
+    getDefaultProps:function(){
+      return {
+        type: Constants.TEMPERATURE_TYPES.KELVIN,
+        temperature: 0,
+        current_type: Constants.TEMPERATURE_TYPES.KELVIN
+      }
+    },
+
+    propTypes: {
+      type: React.PropTypes.number,
+      temperature: React.PropTypes.number,
+      current_type: React.PropTypes.number
+    },
+      
+    render: function(){
+      temperature = this.props.temperature - 273.15;
+      type = this.props.type
+
+      return <span className="temperature">Temperature: {Math.round(temperature)}</span>;
+    }
+  });
+
+  $(document).ready(function () {
+    React.render(
+    <WeatherGet source="http://api.openweathermap.org/data/2.5/forecast/daily?q=<%= params[:city] || 'manila'%>&cnt=7&mode=json" />,
+    document.getElementById('content')
+    );
+  });
+</script>
